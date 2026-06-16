@@ -1,10 +1,13 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const Services = () => {
   const t = useTranslations("services");
@@ -20,107 +23,164 @@ const Services = () => {
     desc: t(`items.${i}.description`),
   }));
 
-  const N = items.length;
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+
+    const ctx = gsap.context(() => {
+      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+      const totalCards = cards.length;
+      if (totalCards === 0) return;
+
+      gsap.set(cards, { opacity: 0, scale: 0.7, y: 80 });
+
+      const master = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: `+=${totalCards * 200}%`,
+          pin: track,
+          scrub: 0.8,
+          anticipatePin: 1,
+        },
+      });
+
+      const cardDuration = 1;
+
+      cards.forEach((card, i) => {
+        const enterStart = i * cardDuration;
+        const holdStart = enterStart + 0.3;
+        const exitStart = enterStart + 0.65;
+        const exitEnd = exitStart + 0.35;
+
+        master.to(
+          card,
+          {
+            opacity: 1,
+            scale: 1.05,
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out",
+          },
+          enterStart
+        );
+
+        master.to(
+          card,
+          {
+            scale: 1.12,
+            duration: 0.35,
+            ease: "power1.inOut",
+          },
+          holdStart
+        );
+
+        master.to(
+          card,
+          {
+            scale: 1,
+            duration: 0.15,
+            ease: "power2.out",
+          },
+          holdStart + 0.35
+        );
+
+        if (i < totalCards - 1) {
+          master.to(
+            card,
+            {
+              opacity: 0,
+              scale: 0.75,
+              y: -60,
+              duration: 0.35,
+              ease: "power2.in",
+            },
+            exitStart
+          );
+        } else {
+          master.to(
+            card,
+            {
+              opacity: 0,
+              scale: 0.8,
+              y: -40,
+              duration: 0.35,
+              ease: "power2.in",
+            },
+            exitStart
+          );
+        }
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="services" className="relative bg-black">
-      <div className="mx-auto max-w-[1400px] px-6 pt-28 text-center md:px-12 md:pt-40">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.8, ease: EASE }}
-          className="mb-6 font-mono text-[10px] uppercase tracking-[0.32em] text-brand-yellow"
-        >
-          {t("eyebrow")}
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
-          className="mx-auto max-w-4xl font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(32px,5.5vw,68px)] text-white"
-        >
-          {t("headline")} <span className="text-brand-yellow">{t("headline_accent")}</span>
-        </motion.h2>
-      </div>
+    <section ref={sectionRef} id="services" className="relative bg-black">
+      <div
+        ref={trackRef}
+        className="relative h-screen overflow-hidden"
+      >
+        <div className="absolute inset-0 z-10 mx-auto max-w-[1400px] px-6 pt-28 text-center md:px-12 md:pt-40 pointer-events-none">
+          <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.32em] text-brand-yellow">
+            {t("eyebrow")}
+          </p>
+          <h2 className="mx-auto max-w-4xl font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(32px,5.5vw,68px)] text-white">
+            {t("headline")}{" "}
+            <span className="text-brand-yellow">{t("headline_accent")}</span>
+          </h2>
+        </div>
 
-      <div className="mx-auto max-w-[1140px] px-6 pt-20 pb-20 md:px-12">
         {items.map((s, i) => (
-          <ServiceCard key={i} index={i} total={N} {...s} />
+          <div
+            key={i}
+            ref={(el) => { cardsRef.current[i] = el; }}
+            className="absolute inset-0 z-20 flex items-center justify-center px-6 md:px-12"
+          >
+            <div
+              data-cursor="hover"
+              className="group grid w-full max-w-[1140px] grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] transition-colors duration-500 hover:border-brand-yellow/40 lg:grid-cols-2"
+            >
+              <div className="relative z-10 flex flex-col justify-between p-8 md:p-14">
+                <div className="flex items-center justify-between">
+                  <span className="text-4xl">{s.icon}</span>
+                  <span className="font-mono text-xs tracking-[0.2em] text-brand-yellow">
+                    {s.n} / 0{items.length}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(34px,5vw,72px)] text-white">
+                    {s.title}
+                  </h3>
+                  <p className="mt-6 max-w-md text-lg leading-relaxed text-neutral-400">
+                    {s.desc}
+                  </p>
+                  <span className="mt-10 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-brand-yellow">
+                    Explore
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-yellow/60 transition-transform duration-500 group-hover:rotate-45">
+                      ↗
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div className="relative flex min-h-[30vh] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0b0b0f] p-6 lg:min-h-0 lg:border-l lg:border-t-0">
+                <span className="pointer-events-none absolute select-none font-display text-[30vw] font-bold leading-none text-white/[0.035] lg:text-[15vw]">
+                  {s.n}
+                </span>
+                <Visual kind={s.visual} />
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>
-  );
-};
-
-const ServiceCard = ({
-  index,
-  total,
-  n,
-  title,
-  desc,
-  icon,
-  visual,
-}: {
-  index: number;
-  total: number;
-  n: string;
-  title: string;
-  desc: string;
-  icon: string;
-  visual: "web" | "growth" | "network" | "arch";
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: false, margin: "-15% 0px -15% 0px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 60, scale: 0.92 }}
-      animate={
-        inView
-          ? { opacity: 1, y: 0, scale: 1 }
-          : { opacity: 0, y: 60, scale: 0.92 }
-      }
-      transition={{ duration: 0.8, ease: EASE, delay: 0.05 }}
-      className="relative mb-8 last:mb-0"
-    >
-      <div
-        data-cursor="hover"
-        className="group grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] transition-colors duration-500 hover:border-brand-yellow/40 lg:grid-cols-2"
-      >
-        <div className="relative z-10 flex flex-col justify-between p-8 md:p-14">
-          <div className="flex items-center justify-between">
-            <span className="text-4xl">{icon}</span>
-            <span className="font-mono text-xs tracking-[0.2em] text-brand-yellow">
-              {n} / 0{total}
-            </span>
-          </div>
-          <div>
-            <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(34px,5vw,72px)] text-white">
-              {title}
-            </h3>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-neutral-400">
-              {desc}
-            </p>
-            <span className="mt-10 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-brand-yellow">
-              Explore
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-yellow/60 transition-transform duration-500 group-hover:rotate-45">
-                ↗
-              </span>
-            </span>
-          </div>
-        </div>
-
-        <div className="relative flex min-h-[30vh] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0b0b0f] p-6 lg:min-h-0 lg:border-l lg:border-t-0">
-          <span className="pointer-events-none absolute select-none font-display text-[30vw] font-bold leading-none text-white/[0.035] lg:text-[15vw]">
-            {n}
-          </span>
-          <Visual kind={visual} />
-        </div>
-      </div>
-    </motion.div>
   );
 };
 

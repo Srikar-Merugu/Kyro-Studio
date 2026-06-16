@@ -104,7 +104,7 @@ const StatsShowcase = () => {
             >
               {stat.display || stat.numVal}{stat.suffix}
             </span>
-            <span className="mt-6 font-mono text-[11px] uppercase tracking-[0.35em] text-brand-yellow/70">
+            <span className="mt-6 font-mono text-[13px] md:text-[15px] font-bold uppercase tracking-[0.3em] text-brand-yellow/80">
               {stat.label}
             </span>
           </div>

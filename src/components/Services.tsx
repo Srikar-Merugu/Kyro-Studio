@@ -153,61 +153,59 @@ const Services = () => {
           </h2>
         </div>
 
-        <div className="absolute inset-0 z-20 flex items-center justify-center">
-          <div className="flex flex-col items-center">
-            <div
-              ref={labelRef}
-              className="mb-8 pointer-events-none"
-            >
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.4em] text-brand-yellow/80">
-                Services
-              </span>
-            </div>
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center">
+          <div
+            ref={labelRef}
+            className="mb-6 pointer-events-none md:mb-8"
+          >
+            <span className="font-mono text-[11px] font-medium uppercase tracking-[0.4em] text-brand-yellow/80">
+              Services
+            </span>
+          </div>
 
-            <div className="relative">
-              {items.map((s, i) => (
+          <div className="relative w-full flex-1 flex items-center justify-center">
+            {items.map((s, i) => (
+              <div
+                key={i}
+                ref={(el) => { cardsRef.current[i] = el; }}
+                className="absolute inset-0 flex items-center justify-center px-6 md:px-12"
+              >
                 <div
-                  key={i}
-                  ref={(el) => { cardsRef.current[i] = el; }}
-                  className="flex items-center justify-center px-6 md:px-12"
+                  data-cursor="hover"
+                  className="group grid w-full max-w-[1100px] grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] lg:grid-cols-[1fr_1fr]"
                 >
-                  <div
-                    data-cursor="hover"
-                    className="group grid w-full max-w-[1100px] grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] lg:grid-cols-[1fr_1fr]"
-                  >
-                    <div className="relative z-10 flex flex-col justify-between p-8 md:p-12 lg:p-14">
-                      <div className="flex items-center justify-between">
-                        <span className="text-4xl">{s.icon}</span>
-                        <span className="font-mono text-xs tracking-[0.2em] text-brand-yellow">
-                          {s.n} / 0{items.length}
-                        </span>
-                      </div>
-                      <div>
-                        <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)] text-white">
-                          {s.title}
-                        </h3>
-                        <p className="mt-5 max-w-md text-base leading-relaxed text-neutral-400 lg:text-lg">
-                          {s.desc}
-                        </p>
-                        <span className="mt-8 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-brand-yellow">
-                          Explore
-                          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-yellow/60 transition-transform duration-500 group-hover:rotate-45">
-                            ↗
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0b0b0f] p-6 lg:min-h-0 lg:border-l lg:border-t-0">
-                      <span className="pointer-events-none absolute select-none font-display text-[25vw] font-bold leading-none text-white/[0.035] lg:text-[12vw]">
-                        {s.n}
+                  <div className="relative z-10 flex flex-col justify-between p-8 md:p-12 lg:p-14">
+                    <div className="flex items-center justify-between">
+                      <span className="text-4xl">{s.icon}</span>
+                      <span className="font-mono text-xs tracking-[0.2em] text-brand-yellow">
+                        {s.n} / 0{items.length}
                       </span>
-                      <Visual kind={s.visual} />
                     </div>
-                  </div>
+                    <div>
+                      <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)] text-white">
+                        {s.title}
+                      </h3>
+                  <p className="mt-5 max-w-md text-base leading-relaxed text-neutral-400 lg:text-lg">
+                    {s.desc}
+                  </p>
+                  <span className="mt-8 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-brand-yellow">
+                    Explore
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-yellow/60 transition-transform duration-500 group-hover:rotate-45">
+                      ↗
+                    </span>
+                  </span>
                 </div>
-              ))}
+              </div>
+
+              <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0b0b0f] p-6 lg:min-h-0 lg:border-l lg:border-t-0">
+                <span className="pointer-events-none absolute select-none font-display text-[25vw] font-bold leading-none text-white/[0.035] lg:text-[12vw]">
+                  {s.n}
+                </span>
+                <Visual kind={s.visual} />
+              </div>
             </div>
+          </div>
+        ))}
           </div>
         </div>
       </div>

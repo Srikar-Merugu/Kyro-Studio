@@ -182,7 +182,7 @@ const Services = () => {
                       </span>
                     </div>
                     <div>
-                      <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)] text-white">
+                      <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)] text-brand-yellow">
                         {s.title}
                       </h3>
                   <p className="mt-5 max-w-md text-base leading-relaxed text-neutral-400 lg:text-lg">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
@@ -9,156 +9,156 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const STATEMENTS = [
-  { line1: "We don't build", line2: "websites.", accent: "websites." },
-  { line1: "We build digital", line2: "experiences.", accent: "experiences." },
-  { line1: "We build", line2: "automation.", accent: "automation." },
-  { line1: "We build growth", line2: "systems.", accent: "systems." },
-  { line1: "We build the future", line2: "of your business.", accent: "future" },
+const CARDS = [
+  { icon: "◆", title: "Strategy", desc: "We don't guess. Every decision is backed by data, research, and a clear growth framework." },
+  { icon: "◇", title: "Design", desc: "Premium visual systems that communicate trust, authority, and attention to detail." },
+  { icon: "◈", title: "Automation", desc: "Intelligent systems that work while you sleep. Leads, emails, reports — all on autopilot." },
 ];
-
-const STATS = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "95%", label: "Client Satisfaction" },
-  { value: "24/7", label: "Automation Systems" },
-  { value: "3×", label: "Average Lead Growth" },
-];
-
-function GrainOverlay() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 opacity-[0.03] mix-blend-overlay"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        backgroundRepeat: "repeat",
-        backgroundSize: "128px 128px",
-      }}
-    />
-  );
-}
 
 const WhyKyro = () => {
   const t = useTranslations("why");
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const statementRef = useRef<HTMLDivElement>(null);
-  const [activeStatement, setActiveStatement] = useState(0);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const whyRef = useRef<HTMLDivElement>(null);
+  const kyroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const statementEl = statementRef.current;
-    if (!section || !statementEl) return;
+    const hero = heroRef.current;
+    const why = whyRef.current;
+    const kyro = kyroRef.current;
+    if (!hero || !why || !kyro) return;
 
     const ctx = gsap.context(() => {
-      const wordEls = statementEl.querySelectorAll(".sw");
-      gsap.set(wordEls, { opacity: 0, y: 50, filter: "blur(6px)" });
+      const whyChars = why.querySelectorAll(".wc");
+      const kyroChars = kyro.querySelectorAll(".wc");
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "60% bottom",
-        scrub: 0.5,
-        onUpdate: (self) => {
-          const p = self.progress;
-          const idx = Math.min(Math.floor(p * STATEMENTS.length), STATEMENTS.length - 1);
-          setActiveStatement(Math.max(0, idx));
+      gsap.set(whyChars, { opacity: 0, y: 80, rotateX: -40 });
+      gsap.set(kyroChars, { opacity: 0, y: 80, rotateX: -40 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: hero,
+          start: "top 80%",
+          end: "top 20%",
+          scrub: 0.5,
         },
       });
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              gsap.fromTo(
-                wordEls,
-                { opacity: 0, y: 50, filter: "blur(6px)" },
-                {
-                  opacity: 1,
-                  y: 0,
-                  filter: "blur(0px)",
-                  duration: 0.9,
-                  stagger: 0.08,
-                  ease: "power3.out",
-                }
-              );
-            }
-          });
-        },
-        { threshold: 0.3 }
-      );
-      observer.observe(section);
+      whyChars.forEach((char, i) => {
+        tl.to(char, { opacity: 1, y: 0, rotateX: 0, duration: 0.3, ease: "power3.out" }, i * 0.06);
+      });
 
-      return () => observer.disconnect();
-    }, section);
+      kyroChars.forEach((char, i) => {
+        tl.to(char, { opacity: 1, y: 0, rotateX: 0, duration: 0.3, ease: "power3.out" }, whyChars.length * 0.06 + i * 0.06);
+      });
+    }, hero);
 
     return () => ctx.revert();
   }, []);
 
-  const statement = STATEMENTS[activeStatement];
-  const stats = STATS.map((s, i) => ({
-    ...s,
-    label: t(`stats.${i}.label`),
-  }));
+  const stats = [
+    { value: "50+", label: t("stats.0.label") },
+    { value: "95%", label: t("stats.1.label") },
+    { value: "24/7", label: t("stats.2.label") },
+    { value: "3×", label: t("stats.3.label") },
+  ];
 
   return (
-    <section ref={sectionRef} id="why-kyro" className="relative bg-[#08080e]">
-      <GrainOverlay />
-
+    <section id="why-kyro" className="relative bg-[#08080e] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/3 w-[600px] h-[600px] bg-brand-navy/6 rounded-full blur-[180px]" />
-        <div className="absolute bottom-1/3 right-1/3 w-[500px] h-[500px] bg-brand-yellow/3 rounded-full blur-[160px]" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-brand-navy/5 rounded-full blur-[180px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-brand-yellow/3 rounded-full blur-[160px]" />
       </div>
 
       <div
-        ref={statementRef}
-        className="relative z-10 flex flex-col items-center justify-center py-32 md:py-40 px-6 text-center"
+        ref={heroRef}
+        className="relative z-10 flex flex-col items-center justify-center py-32 md:py-44 px-6"
       >
-        <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.4em] text-brand-yellow/70">
+        <p className="mb-10 font-mono text-[11px] uppercase tracking-[0.4em] text-brand-yellow/60">
           {t("eyebrow")}
         </p>
-        <h2 className="max-w-6xl font-display font-medium uppercase leading-[0.88] tracking-[-0.05em] text-[clamp(40px,10vw,140px)]">
-          <span className="sw inline-block mr-[0.25em] text-white">{statement.line1}</span>
-          <br />
-          <span className="sw inline-block text-brand-yellow">{statement.line2}</span>
-        </h2>
 
-        <div className="mt-12 flex gap-2">
-          {STATEMENTS.map((_, i) => (
-            <span
-              key={i}
-              className={`block h-1 rounded-full transition-all duration-500 ${
-                i === activeStatement ? "w-8 bg-brand-yellow" : "w-2 bg-white/15"
-              }`}
-            />
-          ))}
+        <div className="overflow-hidden">
+          <div ref={whyRef} className="flex justify-center" style={{ perspective: "600px" }}>
+            {"WHY".split("").map((char, i) => (
+              <span
+                key={i}
+                className="wc inline-block font-display font-medium uppercase text-white"
+                style={{
+                  fontSize: "clamp(60px, 18vw, 220px)",
+                  lineHeight: "0.85",
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                {char}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="overflow-hidden mt-2">
+          <div ref={kyroRef} className="flex justify-center" style={{ perspective: "600px" }}>
+            {"KYRO".split("").map((char, i) => (
+              <span
+                key={i}
+                className="wc inline-block font-display font-medium uppercase text-brand-yellow"
+                style={{
+                  fontSize: "clamp(60px, 18vw, 220px)",
+                  lineHeight: "0.85",
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                {char}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-24 md:px-12">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {stats.map((s, i) => (
-            <div key={i} className="text-center lg:text-left">
-              <span className="block font-display font-medium leading-none tracking-[-0.04em] text-[clamp(48px,8vw,96px)] text-white">
-                {s.value}
-              </span>
-              <span className="mt-3 block font-mono text-[11px] uppercase tracking-[0.25em] text-brand-yellow/70">
-                {s.label}
-              </span>
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-20 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {CARDS.map((card, i) => (
+            <div
+              key={i}
+              className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 transition-all duration-500 hover:border-brand-yellow/20 hover:bg-white/[0.04]"
+            >
+              <span className="block mb-5 text-brand-yellow text-2xl">{card.icon}</span>
+              <h3 className="mb-3 font-display font-medium text-xl text-white uppercase tracking-[-0.02em]">
+                {card.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-neutral-400">
+                {card.desc}
+              </p>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 pb-32 md:px-12">
-        <h3 className="mb-12 max-w-5xl font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,5vw,72px)] text-white">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-16 md:px-12">
+        <h3 className="mb-10 max-w-5xl font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(24px,4vw,56px)] text-white">
           {t("headline")} <span className="text-brand-yellow">{t("headline_accent")}</span>
         </h3>
         <div className="max-w-4xl">
           {[0, 1, 2, 3, 4].map((i) => (
-            <div key={i} className="overflow-hidden border-b border-white/8 py-5">
-              <p className="flex items-center gap-5 font-display text-[clamp(18px,2.5vw,36px)] font-normal leading-[1.2] tracking-[-0.02em] text-neutral-400 transition-colors duration-300 hover:text-white">
+            <div key={i} className="overflow-hidden border-b border-white/8 py-4">
+              <p className="flex items-center gap-4 font-display text-[clamp(16px,2vw,30px)] font-normal leading-[1.2] tracking-[-0.02em] text-neutral-400 transition-colors duration-300 hover:text-white">
                 <span className="text-brand-yellow">→</span>
                 {t(`bullets.${i}`)}
               </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-20 md:px-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {stats.map((s, i) => (
+            <div key={i} className="text-center lg:text-left">
+              <span className="block font-display font-medium leading-none tracking-[-0.04em] text-[clamp(40px,7vw,80px)] text-white">
+                {s.value}
+              </span>
+              <span className="mt-3 block font-mono text-[10px] uppercase tracking-[0.25em] text-brand-yellow/60">
+                {s.label}
+              </span>
             </div>
           ))}
         </div>

@@ -50,7 +50,7 @@ const WhyKyro = () => {
 
       <div
         ref={heroRef}
-        className="relative z-10 flex flex-col items-center justify-center py-32 md:py-44 px-6"
+        className="relative z-10 flex flex-col items-center justify-center py-32 md:py-44 px-10 md:px-20"
       >
         <p className="mb-10 font-mono text-[11px] uppercase tracking-[0.4em] text-brand-yellow/60">
           {t("eyebrow")}

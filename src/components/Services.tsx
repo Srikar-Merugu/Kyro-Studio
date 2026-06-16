@@ -25,12 +25,14 @@ const Services = () => {
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
-    if (!section || !track) return;
+    const heading = headingRef.current;
+    if (!section || !track || !heading) return;
 
     const ctx = gsap.context(() => {
       const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
@@ -43,41 +45,52 @@ const Services = () => {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: `+=${totalCards * 200}%`,
+          end: `+=${(totalCards + 1) * 100}%`,
           pin: track,
-          scrub: 0.8,
+          scrub: 0.6,
           anticipatePin: 1,
         },
       });
 
-      const cardDuration = 1;
+      master.to(
+        heading,
+        {
+          opacity: 0,
+          y: -60,
+          duration: 0.8,
+          ease: "power2.in",
+        },
+        0
+      );
+
+      const cardStart = 1;
 
       cards.forEach((card, i) => {
-        const enterStart = i * cardDuration;
-        const holdStart = enterStart + 0.3;
-        const exitStart = enterStart + 0.65;
-        const exitEnd = exitStart + 0.35;
+        const enter = cardStart + i * 1;
+        const peak = enter + 0.3;
+        const settle = peak + 0.2;
+        const exit = settle + 0.3;
 
         master.to(
           card,
           {
             opacity: 1,
-            scale: 1.05,
+            scale: 1,
             y: 0,
             duration: 0.3,
-            ease: "power2.out",
+            ease: "power3.out",
           },
-          enterStart
+          enter
         );
 
         master.to(
           card,
           {
-            scale: 1.12,
-            duration: 0.35,
-            ease: "power1.inOut",
+            scale: 1.06,
+            duration: 0.25,
+            ease: "power2.inOut",
           },
-          holdStart
+          peak
         );
 
         master.to(
@@ -87,34 +100,20 @@ const Services = () => {
             duration: 0.15,
             ease: "power2.out",
           },
-          holdStart + 0.35
+          settle
         );
 
-        if (i < totalCards - 1) {
-          master.to(
-            card,
-            {
-              opacity: 0,
-              scale: 0.75,
-              y: -60,
-              duration: 0.35,
-              ease: "power2.in",
-            },
-            exitStart
-          );
-        } else {
-          master.to(
-            card,
-            {
-              opacity: 0,
-              scale: 0.8,
-              y: -40,
-              duration: 0.35,
-              ease: "power2.in",
-            },
-            exitStart
-          );
-        }
+        master.to(
+          card,
+          {
+            opacity: 0,
+            scale: 0.8,
+            y: -50,
+            duration: 0.3,
+            ease: "power2.in",
+          },
+          exit
+        );
       });
     }, section);
 
@@ -127,7 +126,10 @@ const Services = () => {
         ref={trackRef}
         className="relative h-screen overflow-hidden"
       >
-        <div className="absolute inset-0 z-10 mx-auto max-w-[1400px] px-6 pt-28 text-center md:px-12 md:pt-40 pointer-events-none">
+        <div
+          ref={headingRef}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center md:px-12"
+        >
           <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.32em] text-brand-yellow">
             {t("eyebrow")}
           </p>
@@ -145,9 +147,9 @@ const Services = () => {
           >
             <div
               data-cursor="hover"
-              className="group grid w-full max-w-[1140px] grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] transition-colors duration-500 hover:border-brand-yellow/40 lg:grid-cols-2"
+              className="group grid w-full max-w-[1100px] grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] lg:grid-cols-[1fr_1fr]"
             >
-              <div className="relative z-10 flex flex-col justify-between p-8 md:p-14">
+              <div className="relative z-10 flex flex-col justify-between p-8 md:p-12 lg:p-14">
                 <div className="flex items-center justify-between">
                   <span className="text-4xl">{s.icon}</span>
                   <span className="font-mono text-xs tracking-[0.2em] text-brand-yellow">
@@ -155,13 +157,13 @@ const Services = () => {
                   </span>
                 </div>
                 <div>
-                  <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(34px,5vw,72px)] text-white">
+                  <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)] text-white">
                     {s.title}
                   </h3>
-                  <p className="mt-6 max-w-md text-lg leading-relaxed text-neutral-400">
+                  <p className="mt-5 max-w-md text-base leading-relaxed text-neutral-400 lg:text-lg">
                     {s.desc}
                   </p>
-                  <span className="mt-10 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-brand-yellow">
+                  <span className="mt-8 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-brand-yellow">
                     Explore
                     <span className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-yellow/60 transition-transform duration-500 group-hover:rotate-45">
                       ↗
@@ -170,8 +172,8 @@ const Services = () => {
                 </div>
               </div>
 
-              <div className="relative flex min-h-[30vh] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0b0b0f] p-6 lg:min-h-0 lg:border-l lg:border-t-0">
-                <span className="pointer-events-none absolute select-none font-display text-[30vw] font-bold leading-none text-white/[0.035] lg:text-[15vw]">
+              <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0b0b0f] p-6 lg:min-h-0 lg:border-l lg:border-t-0">
+                <span className="pointer-events-none absolute select-none font-display text-[25vw] font-bold leading-none text-white/[0.035] lg:text-[12vw]">
                   {s.n}
                 </span>
                 <Visual kind={s.visual} />
@@ -188,7 +190,7 @@ const Y = "#D4D93F";
 
 function Visual({ kind }: { kind: "web" | "growth" | "network" | "arch" }) {
   return (
-    <div className="relative w-[82%] max-w-[460px] [perspective:1200px]">
+    <div className="relative w-[80%] max-w-[420px] [perspective:1200px]">
       <div className="transition-transform duration-700 ease-out will-change-transform group-hover:[transform:rotateX(6deg)_rotateY(-7deg)_translateY(-6px)]">
         {kind === "web" && <WebVisual />}
         {kind === "growth" && <GrowthVisual />}

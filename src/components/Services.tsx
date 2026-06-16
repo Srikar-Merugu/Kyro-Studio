@@ -25,15 +25,13 @@ const Services = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
     const heading = headingRef.current;
-    const label = labelRef.current;
-    if (!section || !track || !heading || !label) return;
+    if (!section || !track || !heading) return;
 
     const ctx = gsap.context(() => {
       const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
@@ -41,7 +39,6 @@ const Services = () => {
       if (totalCards === 0) return;
 
       gsap.set(cards, { opacity: 0, scale: 0.7, y: 80 });
-      gsap.set(label, { opacity: 0, y: 20 });
 
       const master = gsap.timeline({
         scrollTrigger: {
@@ -63,17 +60,6 @@ const Services = () => {
           ease: "power2.in",
         },
         0
-      );
-
-      master.to(
-        label,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        0.3
       );
 
       const cardStart = 1;
@@ -152,17 +138,8 @@ const Services = () => {
           </h2>
         </div>
 
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center">
-          <div
-            ref={labelRef}
-            className="mb-6 pointer-events-none md:mb-8"
-          >
-            <span className="font-mono text-[11px] font-medium uppercase tracking-[0.4em] text-brand-yellow/80">
-              Services
-            </span>
-          </div>
-
-          <div className="relative w-full flex-1 flex items-center justify-center">
+        <div className="absolute inset-0 z-20 flex items-center justify-center">
+          <div className="relative">
             {items.map((s, i) => (
               <div
                 key={i}

@@ -12,14 +12,13 @@ if (typeof window !== "undefined") {
 const Services = () => {
   const t = useTranslations("services");
   const items = [
-    { icon: "🌐", visual: "web" as const },
-    { icon: "📡", visual: "growth" as const },
-    { icon: "⚡", visual: "network" as const },
-    { icon: "🛠", visual: "arch" as const },
+    { icon: "🌐", visual: "web" as const, word1: "Web Design &", word2: "Development" },
+    { icon: "📡", visual: "growth" as const, word1: "Performance", word2: "Marketing" },
+    { icon: "⚡", visual: "network" as const, word1: "AI", word2: "Automation" },
+    { icon: "🛠", visual: "arch" as const, word1: "Custom", word2: "Applications" },
   ].map((m, i) => ({
     ...m,
     n: `0${i + 1}`,
-    title: t(`items.${i}.title`),
     desc: t(`items.${i}.description`),
   }));
 
@@ -182,8 +181,9 @@ const Services = () => {
                       </span>
                     </div>
                     <div>
-                      <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)] text-brand-yellow">
-                        {s.title}
+                      <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)]">
+                        <span className="text-white">{s.word1}</span>{" "}
+                        <span className="text-brand-yellow">{s.word2}</span>
                       </h3>
                   <p className="mt-5 max-w-md text-base leading-relaxed text-neutral-400 lg:text-lg">
                     {s.desc}

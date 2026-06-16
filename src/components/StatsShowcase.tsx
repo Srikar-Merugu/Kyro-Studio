@@ -33,7 +33,8 @@ const StatsShowcase = () => {
 
     const ctx = gsap.context(() => {
       gsap.set(label, { opacity: 0, y: 20 });
-      gsap.set(stats, { opacity: 0, scale: 0.85, y: 50 });
+      gsap.set(stats[0], { opacity: 1, scale: 1, y: 0 });
+      gsap.set(stats.slice(1), { opacity: 0, scale: 0.85, y: 50 });
 
       const master = gsap.timeline({
         scrollTrigger: {
@@ -58,10 +59,16 @@ const StatsShowcase = () => {
         const settle = peak + 0.15;
         const exit = settle + 0.3;
 
-        master.to(stat, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "power3.out" }, enter);
-        master.to(stat, { scale: 1.03, duration: 0.2, ease: "power2.inOut" }, peak);
-        master.to(stat, { scale: 1, duration: 0.1, ease: "power2.out" }, settle);
-        master.to(stat, { opacity: 0, scale: 0.9, y: -40, duration: 0.3, ease: "power2.in" }, exit);
+        if (i === 0) {
+          master.to(stat, { scale: 1.03, duration: 0.2, ease: "power2.inOut" }, enter + 0.3);
+          master.to(stat, { scale: 1, duration: 0.1, ease: "power2.out" }, enter + 0.5);
+          master.to(stat, { opacity: 0, scale: 0.9, y: -40, duration: 0.3, ease: "power2.in" }, exit);
+        } else {
+          master.to(stat, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "power3.out" }, enter);
+          master.to(stat, { scale: 1.03, duration: 0.2, ease: "power2.inOut" }, peak);
+          master.to(stat, { scale: 1, duration: 0.1, ease: "power2.out" }, settle);
+          master.to(stat, { opacity: 0, scale: 0.9, y: -40, duration: 0.3, ease: "power2.in" }, exit);
+        }
       });
     }, section);
 

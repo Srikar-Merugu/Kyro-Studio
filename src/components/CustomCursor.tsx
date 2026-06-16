@@ -10,13 +10,20 @@ export default function CustomCursor() {
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduced) return;
+    if (fine && !reduced) {
+      setEnabled(true);
+      document.documentElement.classList.add("has-custom-cursor");
+    }
+    return () => {
+      document.documentElement.classList.remove("has-custom-cursor");
+    };
+  }, []);
 
-    setEnabled(true);
-    document.documentElement.classList.add("has-custom-cursor");
-
-    const ring = ringRef.current!;
-    const dot = dotRef.current!;
+  useEffect(() => {
+    if (!enabled) return;
+    const ring = ringRef.current;
+    const dot = dotRef.current;
+    if (!ring || !dot) return;
 
     let mx = window.innerWidth / 2;
     let my = window.innerHeight / 2;
@@ -70,9 +77,8 @@ export default function CustomCursor() {
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("mouseup", onUp);
       document.removeEventListener("mouseleave", onLeave);
-      document.documentElement.classList.remove("has-custom-cursor");
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 

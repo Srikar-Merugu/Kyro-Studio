@@ -250,7 +250,7 @@ const AiAutomation = () => {
       ref={sectionRef}
       id="automation"
       className="relative bg-[#06060a]"
-      style={{ height: `${(STAGES.length + 1) * 100}vh` }}
+      style={{ height: "160vh" }}
     >
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">

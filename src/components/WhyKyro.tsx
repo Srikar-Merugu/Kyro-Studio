@@ -18,21 +18,17 @@ const CARDS = [
 const WhyKyro = () => {
   const t = useTranslations("why");
   const heroRef = useRef<HTMLDivElement>(null);
-  const whyRef = useRef<HTMLDivElement>(null);
-  const kyroRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const hero = heroRef.current;
-    const why = whyRef.current;
-    const kyro = kyroRef.current;
-    if (!hero || !why || !kyro) return;
+    const text = textRef.current;
+    if (!hero || !text) return;
 
     const ctx = gsap.context(() => {
-      const whyChars = why.querySelectorAll(".wc");
-      const kyroChars = kyro.querySelectorAll(".wc");
+      const chars = text.querySelectorAll(".wc");
 
-      gsap.set(whyChars, { opacity: 0, y: 80, rotateX: -40 });
-      gsap.set(kyroChars, { opacity: 0, y: 80, rotateX: -40 });
+      gsap.set(chars, { opacity: 0, y: 80, rotateX: -40 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -43,12 +39,8 @@ const WhyKyro = () => {
         },
       });
 
-      whyChars.forEach((char, i) => {
-        tl.to(char, { opacity: 1, y: 0, rotateX: 0, duration: 0.3, ease: "power3.out" }, i * 0.06);
-      });
-
-      kyroChars.forEach((char, i) => {
-        tl.to(char, { opacity: 1, y: 0, rotateX: 0, duration: 0.3, ease: "power3.out" }, whyChars.length * 0.06 + i * 0.06);
+      chars.forEach((char, i) => {
+        tl.to(char, { opacity: 1, y: 0, rotateX: 0, duration: 0.3, ease: "power3.out" }, i * 0.05);
       });
     }, hero);
 
@@ -78,13 +70,13 @@ const WhyKyro = () => {
         </p>
 
         <div className="overflow-hidden">
-          <div ref={whyRef} className="flex justify-center" style={{ perspective: "600px" }}>
+          <div ref={textRef} className="flex justify-center items-baseline gap-[0.3em]" style={{ perspective: "600px" }}>
             {"WHY".split("").map((char, i) => (
               <span
-                key={i}
+                key={`why-${i}`}
                 className="wc inline-block font-display font-medium uppercase text-white"
                 style={{
-                  fontSize: "clamp(60px, 18vw, 220px)",
+                  fontSize: "clamp(50px, 14vw, 180px)",
                   lineHeight: "0.85",
                   letterSpacing: "-0.03em",
                 }}
@@ -92,17 +84,12 @@ const WhyKyro = () => {
                 {char}
               </span>
             ))}
-          </div>
-        </div>
-
-        <div className="overflow-hidden mt-2">
-          <div ref={kyroRef} className="flex justify-center" style={{ perspective: "600px" }}>
             {"KYRO".split("").map((char, i) => (
               <span
-                key={i}
+                key={`kyro-${i}`}
                 className="wc inline-block font-display font-medium uppercase text-brand-yellow"
                 style={{
-                  fontSize: "clamp(60px, 18vw, 220px)",
+                  fontSize: "clamp(50px, 14vw, 180px)",
                   lineHeight: "0.85",
                   letterSpacing: "-0.03em",
                 }}

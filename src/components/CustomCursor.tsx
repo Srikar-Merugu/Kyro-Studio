@@ -77,16 +77,16 @@ export default function CustomCursor() {
   if (!enabled) return null;
 
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-[9999]">
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-[2147483647]">
       <div
         ref={ringRef}
-        style={{ opacity: 0 }}
-        className="fixed left-0 top-0 h-10 w-10 rounded-full border-[1.5px] border-[#D4D93F] shadow-[0_0_12px_rgba(212,217,63,0.5)] transition-[opacity] duration-300 will-change-transform"
+        style={{ opacity: 0, willChange: "transform" }}
+        className="fixed left-0 top-0 h-10 w-10 rounded-full border-[1.5px] border-[#D4D93F] shadow-[0_0_12px_rgba(212,217,63,0.5)]"
       />
       <div
         ref={dotRef}
-        style={{ opacity: 0 }}
-        className="fixed left-0 top-0 h-2 w-2 rounded-full bg-[#D4D93F] shadow-[0_0_8px_rgba(212,217,63,0.8)] transition-[opacity] duration-300 will-change-transform"
+        style={{ opacity: 0, willChange: "transform" }}
+        className="fixed left-0 top-0 h-2 w-2 rounded-full bg-[#D4D93F] shadow-[0_0_8px_rgba(212,217,63,0.8)]"
       />
     </div>
   );

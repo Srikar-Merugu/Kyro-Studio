@@ -153,36 +153,38 @@ const Services = () => {
           </h2>
         </div>
 
-        <div
-          ref={labelRef}
-          className="absolute top-8 left-0 right-0 z-30 flex justify-center px-6 pointer-events-none md:top-10"
-        >
-          <span className="font-mono text-[11px] font-medium uppercase tracking-[0.4em] text-brand-yellow/80">
-            Services
-          </span>
-        </div>
-
-        {items.map((s, i) => (
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center">
           <div
-            key={i}
-            ref={(el) => { cardsRef.current[i] = el; }}
-            className="absolute inset-0 z-20 flex items-center justify-center px-6 md:px-12"
+            ref={labelRef}
+            className="mb-6 pointer-events-none md:mb-8"
           >
-            <div
-              data-cursor="hover"
-              className="group grid w-full max-w-[1100px] grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] lg:grid-cols-[1fr_1fr]"
-            >
-              <div className="relative z-10 flex flex-col justify-between p-8 md:p-12 lg:p-14">
-                <div className="flex items-center justify-between">
-                  <span className="text-4xl">{s.icon}</span>
-                  <span className="font-mono text-xs tracking-[0.2em] text-brand-yellow">
-                    {s.n} / 0{items.length}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)] text-white">
-                    {s.title}
-                  </h3>
+            <span className="font-mono text-[11px] font-medium uppercase tracking-[0.4em] text-brand-yellow/80">
+              Services
+            </span>
+          </div>
+
+          <div className="relative w-full flex-1 flex items-center justify-center">
+            {items.map((s, i) => (
+              <div
+                key={i}
+                ref={(el) => { cardsRef.current[i] = el; }}
+                className="absolute inset-0 flex items-center justify-center px-6 md:px-12"
+              >
+                <div
+                  data-cursor="hover"
+                  className="group grid w-full max-w-[1100px] grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] lg:grid-cols-[1fr_1fr]"
+                >
+                  <div className="relative z-10 flex flex-col justify-between p-8 md:p-12 lg:p-14">
+                    <div className="flex items-center justify-between">
+                      <span className="text-4xl">{s.icon}</span>
+                      <span className="font-mono text-xs tracking-[0.2em] text-brand-yellow">
+                        {s.n} / 0{items.length}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-display font-medium uppercase leading-[0.95] tracking-[-0.04em] text-[clamp(28px,4vw,64px)] text-white">
+                        {s.title}
+                      </h3>
                   <p className="mt-5 max-w-md text-base leading-relaxed text-neutral-400 lg:text-lg">
                     {s.desc}
                   </p>
@@ -204,6 +206,8 @@ const Services = () => {
             </div>
           </div>
         ))}
+          </div>
+        </div>
       </div>
     </section>
   );

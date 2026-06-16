@@ -33,86 +33,36 @@ const Services = () => {
     const heading = headingRef.current;
     if (!section || !track || !heading) return;
 
-    const ctx = gsap.context(() => {
-      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
-      const totalCards = cards.length;
-      if (totalCards === 0) return;
+    const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+    if (cards.length === 0) return;
 
-      gsap.set(cards, { opacity: 0, scale: 0.7, y: 80 });
+    const ctx = gsap.context(() => {
+      gsap.set(heading, { opacity: 1, y: 0 });
+      gsap.set(cards, { opacity: 0, scale: 0.85, y: 40 });
 
       const master = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: `+=${(totalCards + 1) * 100}%`,
+          end: `+=${(cards.length + 1) * 100}%`,
           pin: track,
-          scrub: 0.6,
+          scrub: 0.5,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
-      master.to(
-        heading,
-        {
-          opacity: 0,
-          y: -60,
-          duration: 0.8,
-          ease: "power2.in",
-        },
-        0
-      );
+      master.to(heading, { opacity: 0, y: -50, duration: 0.7, ease: "power2.in" }, 0);
 
-      const cardStart = 1;
+      const cardStart = 0.8;
+      const cardDur = 1;
 
       cards.forEach((card, i) => {
-        const enter = cardStart + i * 1;
-        const peak = enter + 0.3;
-        const settle = peak + 0.2;
-        const exit = settle + 0.3;
-
-        master.to(
-          card,
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.3,
-            ease: "power3.out",
-          },
-          enter
-        );
-
-        master.to(
-          card,
-          {
-            scale: 1.06,
-            duration: 0.25,
-            ease: "power2.inOut",
-          },
-          peak
-        );
-
-        master.to(
-          card,
-          {
-            scale: 1,
-            duration: 0.15,
-            ease: "power2.out",
-          },
-          settle
-        );
-
-        master.to(
-          card,
-          {
-            opacity: 0,
-            scale: 0.8,
-            y: -50,
-            duration: 0.3,
-            ease: "power2.in",
-          },
-          exit
-        );
+        const enter = cardStart + i * cardDur;
+        master.to(card, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "power3.out" }, enter);
+        master.to(card, { scale: 1.04, duration: 0.2, ease: "power2.inOut" }, enter + 0.3);
+        master.to(card, { scale: 1, duration: 0.1, ease: "power2.out" }, enter + 0.5);
+        master.to(card, { opacity: 0, scale: 0.88, y: -40, duration: 0.3, ease: "power2.in" }, enter + 0.65);
       });
     }, section);
 
@@ -121,10 +71,7 @@ const Services = () => {
 
   return (
     <section ref={sectionRef} id="services" className="relative bg-black">
-      <div
-        ref={trackRef}
-        className="relative h-screen overflow-hidden"
-      >
+      <div ref={trackRef} className="relative h-screen overflow-hidden">
         <div
           ref={headingRef}
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center md:px-12"
@@ -139,7 +86,7 @@ const Services = () => {
         </div>
 
         <div className="absolute inset-0 z-20 flex items-center justify-center">
-          <div className="relative">
+          <div className="relative w-full h-full">
             {items.map((s, i) => (
               <div
                 key={i}
@@ -162,27 +109,27 @@ const Services = () => {
                         <span className="text-white">{s.word1}</span>{" "}
                         <span className="text-brand-yellow">{s.word2}</span>
                       </h3>
-                  <p className="mt-5 max-w-md text-base leading-relaxed text-neutral-400 lg:text-lg">
-                    {s.desc}
-                  </p>
-                  <span className="mt-8 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-brand-yellow">
-                    Explore
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-yellow/60 transition-transform duration-500 group-hover:rotate-45">
-                      ↗
+                      <p className="mt-5 max-w-md text-base leading-relaxed text-neutral-400 lg:text-lg">
+                        {s.desc}
+                      </p>
+                      <span className="mt-8 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-brand-yellow">
+                        Explore
+                        <span className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-yellow/60 transition-transform duration-500 group-hover:rotate-45">
+                          ↗
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0b0b0f] p-6 lg:min-h-0 lg:border-l lg:border-t-0">
+                    <span className="pointer-events-none absolute select-none font-display text-[25vw] font-bold leading-none text-white/[0.035] lg:text-[12vw]">
+                      {s.n}
                     </span>
-                  </span>
+                    <Visual kind={s.visual} />
+                  </div>
                 </div>
               </div>
-
-              <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0b0b0f] p-6 lg:min-h-0 lg:border-l lg:border-t-0">
-                <span className="pointer-events-none absolute select-none font-display text-[25vw] font-bold leading-none text-white/[0.035] lg:text-[12vw]">
-                  {s.n}
-                </span>
-                <Visual kind={s.visual} />
-              </div>
-            </div>
-          </div>
-        ))}
+            ))}
           </div>
         </div>
       </div>

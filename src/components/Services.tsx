@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -20,11 +20,6 @@ const Services = () => {
     desc: t(`items.${i}.description`),
   }));
 
-  const trackRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start start", "end end"],
-  });
   const N = items.length;
 
   return (
@@ -50,20 +45,16 @@ const Services = () => {
         </motion.h2>
       </div>
 
-      <div ref={trackRef} className="relative" style={{ height: `${N * 100}vh` }}>
-        <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden">
-          {items.map((s, i) => (
-            <ServiceCard key={i} p={scrollYProgress} index={i} total={N} {...s} />
-          ))}
-          <Counter p={scrollYProgress} total={N} />
-        </div>
+      <div className="mx-auto max-w-[1140px] px-6 pt-20 pb-20 md:px-12">
+        {items.map((s, i) => (
+          <ServiceCard key={i} index={i} total={N} {...s} />
+        ))}
       </div>
     </section>
   );
 };
 
 const ServiceCard = ({
-  p,
   index,
   total,
   n,
@@ -72,7 +63,6 @@ const ServiceCard = ({
   icon,
   visual,
 }: {
-  p: MotionValue<number>;
   index: number;
   total: number;
   n: string;
@@ -81,40 +71,24 @@ const ServiceCard = ({
   icon: string;
   visual: "web" | "growth" | "network" | "arch";
 }) => {
-  const w = 1 / total;
-  const c = (index + 0.5) * w;
-
-  const scale = useTransform(
-    p,
-    [Math.max(0, c - w), c, Math.min(1, c + w)],
-    [0.8, 1, 0.8]
-  );
-  const opacity = useTransform(
-    p,
-    [Math.max(0, c - w * 0.8), c - w * 0.1, c + w * 0.1, Math.min(1, c + w * 0.8)],
-    index === 0 ? [1, 1, 1, 0] : index === total - 1 ? [0, 1, 1, 1] : [0, 1, 1, 0]
-  );
-  const y = useTransform(
-    p,
-    [Math.max(0, c - w), c, Math.min(1, c + w)],
-    [60, 0, -60]
-  );
-  const blur = useTransform(
-    p,
-    [Math.max(0, c - w), c, Math.min(1, c + w)],
-    [8, 0, 8]
-  );
-  const filter = useTransform(blur, (b) => `blur(${b}px)`);
-  const pointerEvents = useTransform(opacity, (o) => (o > 0.5 ? "auto" : "none"));
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: false, margin: "-15% 0px -15% 0px" });
 
   return (
     <motion.div
-      style={{ scale, opacity, y, filter, pointerEvents }}
-      className="absolute inset-0 flex items-center justify-center px-6 will-change-transform md:px-12"
+      ref={ref}
+      initial={{ opacity: 0, y: 60, scale: 0.92 }}
+      animate={
+        inView
+          ? { opacity: 1, y: 0, scale: 1 }
+          : { opacity: 0, y: 60, scale: 0.92 }
+      }
+      transition={{ duration: 0.8, ease: EASE, delay: 0.05 }}
+      className="relative mb-8 last:mb-0"
     >
       <div
         data-cursor="hover"
-        className="group grid w-full max-w-[1140px] grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] transition-colors duration-500 hover:border-brand-yellow/40 lg:grid-cols-2"
+        className="group grid w-full grid-cols-1 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] transition-colors duration-500 hover:border-brand-yellow/40 lg:grid-cols-2"
       >
         <div className="relative z-10 flex flex-col justify-between p-8 md:p-14">
           <div className="flex items-center justify-between">
@@ -149,24 +123,6 @@ const ServiceCard = ({
     </motion.div>
   );
 };
-
-function Counter({ p, total }: { p: MotionValue<number>; total: number }) {
-  return (
-    <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 gap-3">
-      {Array.from({ length: total }).map((_, i) => (
-        <Tick key={i} p={p} index={i} total={total} />
-      ))}
-    </div>
-  );
-}
-
-function Tick({ p, index, total }: { p: MotionValue<number>; index: number; total: number }) {
-  const w = 1 / total;
-  const c = (index + 0.5) * w;
-  const opacity = useTransform(p, [c - w * 0.5, c, c + w * 0.5], [0.25, 1, 0.25]);
-  const width = useTransform(p, [c - w * 0.5, c, c + w * 0.5], ["8px", "30px", "8px"]);
-  return <motion.span style={{ opacity, width }} className="h-1.5 rounded-full bg-brand-yellow" />;
-}
 
 const Y = "#D4D93F";
 

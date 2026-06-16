@@ -61,9 +61,9 @@ const WhyKyro = () => {
             {"WHY".split("").map((char, i) => (
               <span
                 key={`why-${i}`}
-                className="wc inline-block font-display font-medium uppercase text-white"
+                className="wc inline-block font-display font-bold uppercase text-white"
                 style={{
-                  fontSize: "clamp(50px, 14vw, 180px)",
+                  fontSize: "clamp(60px, 18vw, 260px)",
                   lineHeight: "0.85",
                   letterSpacing: "-0.03em",
                 }}
@@ -74,9 +74,9 @@ const WhyKyro = () => {
             {"KYRO".split("").map((char, i) => (
               <span
                 key={`kyro-${i}`}
-                className="wc inline-block font-display font-medium uppercase text-brand-yellow"
+                className="wc inline-block font-display font-bold uppercase text-brand-yellow"
                 style={{
-                  fontSize: "clamp(50px, 14vw, 180px)",
+                  fontSize: "clamp(60px, 18vw, 260px)",
                   lineHeight: "0.85",
                   letterSpacing: "-0.03em",
                 }}

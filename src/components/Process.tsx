@@ -66,7 +66,7 @@ const Process = () => {
         );
 
       /* ── Card slide ── */
-      gsap.set(cards, { x: "70%", opacity: 0, scale: 0.95, filter: "blur(3px)" });
+      gsap.set(cards, { x: "40%", opacity: 0, scale: 0.97, filter: "blur(2px)" });
       gsap.set(cards[0], { x: "0%", opacity: 1, scale: 1, filter: "blur(0px)" });
 
       const master = gsap.timeline({
@@ -103,11 +103,11 @@ const Process = () => {
 
       for (let i = 0; i < cards.length - 1; i++) {
         master.to(cards[i], {
-          x: "-70%",
+          x: "-40%",
           opacity: 0,
-          scale: 0.95,
-          filter: "blur(3px)",
-          duration: 0.6,
+          scale: 0.97,
+          filter: "blur(2px)",
+          duration: 0.5,
           ease: "power3.inOut",
         }, i);
 
@@ -116,9 +116,9 @@ const Process = () => {
           opacity: 1,
           scale: 1,
           filter: "blur(0px)",
-          duration: 0.6,
+          duration: 0.5,
           ease: "power3.inOut",
-        }, i + 0.4);
+        }, i + 0.5);
       }
     }, wrapper);
 
@@ -184,7 +184,7 @@ const Process = () => {
               >
                 <div
                   data-cursor="hover"
-                  className="group relative flex h-[52vh] w-full max-w-[780px] flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] p-8 md:p-12 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]"
+                  className="group relative flex h-[52vh] w-[80vw] max-w-[1100px] flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] p-8 md:p-12 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]"
                 >
                   <span className="pointer-events-none absolute -right-4 top-0 select-none font-display text-[20vw] font-bold leading-none text-white/[0.03]">
                     {step.n}

@@ -67,7 +67,9 @@ const Nav = () => {
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         "fixed top-0 left-0 w-full z-100 transition-all duration-500 px-6 py-4",
-        isScrolled ? "glass dark:glass shadow-lg py-3" : "bg-transparent"
+        isScrolled
+          ? "bg-[#08080e]/70 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.06)] py-3"
+          : "bg-transparent"
       )}
     >
       <a

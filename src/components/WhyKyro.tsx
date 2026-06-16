@@ -110,7 +110,7 @@ const WhyKyro = () => {
 
       <div
         ref={statementRef}
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center"
+        className="relative z-10 flex flex-col items-center justify-center py-32 md:py-40 px-6 text-center"
       >
         <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.4em] text-brand-yellow/70">
           {t("eyebrow")}

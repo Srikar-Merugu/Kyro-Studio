@@ -11,17 +11,17 @@ if (typeof window !== "undefined") {
 }
 
 const NODES = [
-  { id: "lead", label: "Lead", x: 0.3, y: 0.12, desc: "Capture leads from every channel — forms, ads, organic, referrals — into a single unified pipeline." },
-  { id: "crm", label: "CRM", x: 0.12, y: 0.32, desc: "Automatically qualify, score, and route leads. No lead falls through the cracks." },
-  { id: "email", label: "Email", x: 0.5, y: 0.22, desc: "Trigger personalized sequences based on behavior. Follow up at the perfect moment, every time." },
-  { id: "ads", label: "Ads", x: 0.82, y: 0.15, desc: "Sync audience data back to ad platforms. Optimize spend with real conversion feedback." },
-  { id: "analytics", label: "Analytics", x: 0.18, y: 0.58, desc: "Real-time dashboards tracking every metric that matters. Know what's working instantly." },
-  { id: "api", label: "API", x: 0.78, y: 0.55, desc: "Connect any tool, any platform. Webhooks, REST, GraphQL — your stack stays connected." },
-  { id: "slack", label: "Slack", x: 0.42, y: 0.42, desc: "Instant team notifications. Deal alerts, lead updates, system events — right where you work." },
-  { id: "ai", label: "AI Agent", x: 0.6, y: 0.4, desc: "The brain. Decides, learns, optimizes. Turns raw data into intelligent action." },
-  { id: "db", label: "Database", x: 0.5, y: 0.72, desc: "Unified data layer. Every system reads and writes from one source of truth." },
-  { id: "webhook", label: "Webhook", x: 0.28, y: 0.78, desc: "Event-driven triggers. Fire automations the instant something happens in any connected system." },
-  { id: "reports", label: "Reports", x: 0.72, y: 0.78, desc: "Automated reporting. Client-ready dashboards generated and delivered on schedule." },
+  { id: "lead", label: "Lead", x: 0.3, y: 0.12 },
+  { id: "crm", label: "CRM", x: 0.12, y: 0.32 },
+  { id: "email", label: "Email", x: 0.5, y: 0.22 },
+  { id: "ads", label: "Ads", x: 0.82, y: 0.15 },
+  { id: "analytics", label: "Analytics", x: 0.18, y: 0.58 },
+  { id: "api", label: "API", x: 0.78, y: 0.55 },
+  { id: "slack", label: "Slack", x: 0.42, y: 0.42 },
+  { id: "ai", label: "AI Agent", x: 0.6, y: 0.4 },
+  { id: "db", label: "Database", x: 0.5, y: 0.72 },
+  { id: "webhook", label: "Webhook", x: 0.28, y: 0.78 },
+  { id: "reports", label: "Reports", x: 0.72, y: 0.78 },
 ];
 
 const EDGES: [number, number][] = [
@@ -229,8 +229,8 @@ const AiAutomation = () => {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: section,
-        start: "top top",
-        end: "bottom bottom",
+        start: "top center",
+        end: "bottom center",
         scrub: true,
         onUpdate: (self) => {
           const p = self.progress;
@@ -249,70 +249,67 @@ const AiAutomation = () => {
     <section
       ref={sectionRef}
       id="automation"
-      className="relative bg-[#06060a]"
-      style={{ height: "160vh" }}
+      className="relative bg-[#06060a] py-24 md:py-32"
     >
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/5 w-[500px] h-[500px] bg-brand-navy/6 rounded-full blur-[150px]" />
-          <div className="absolute bottom-1/4 right-1/5 w-[400px] h-[400px] bg-brand-yellow/4 rounded-full blur-[130px]" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/5 w-[500px] h-[500px] bg-brand-navy/6 rounded-full blur-[150px]" />
+        <div className="absolute bottom-1/4 right-1/5 w-[400px] h-[400px] bg-brand-yellow/4 rounded-full blur-[130px]" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+        <div className="order-2 lg:order-1">
+          <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.4em] text-brand-yellow/70">
+            {t("eyebrow")}
+          </p>
+          <h2 className="mb-6 font-display font-medium uppercase leading-[0.92] tracking-[-0.04em] text-[clamp(30px,4.5vw,60px)] text-white">
+            Automate the work.
+            <br />
+            <span className="text-brand-yellow">Focus on the growth.</span>
+          </h2>
+          <p className="mb-8 max-w-lg text-base leading-relaxed text-neutral-400 lg:text-lg">
+            {t("description")}
+          </p>
+
+          <div className="mb-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-5 transition-all duration-500">
+            <div className="flex items-center gap-2.5 mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-brand-yellow/60">
+                Stage {stageIdx + 1} / {STAGES.length}
+              </span>
+            </div>
+            <p className="text-sm leading-relaxed text-neutral-300">
+              {stage.desc}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2.5 mb-8">
+            {["Make", "Zapier", "n8n"].map((tool) => (
+              <span
+                key={tool}
+                className="px-4 py-1.5 rounded-full border border-brand-yellow/20 text-brand-yellow/70 font-mono text-[10px] uppercase tracking-[0.12em]"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
+
+          <Magnetic strength={0.4}>
+            <a
+              href="https://calendar.app.google/SkMr99BXaF5DhGn98"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="hover"
+              className="group relative inline-flex items-center gap-2 overflow-hidden bg-brand-yellow text-brand-bg font-display font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-full transition-shadow shadow-[0_0_25px_rgba(212,217,63,0.2)] hover:shadow-[0_0_50px_rgba(212,217,63,0.5)]"
+            >
+              <span className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-white/30 transition-transform duration-700 group-hover:translate-x-[200%]" />
+              {t("cta_text")} →
+            </a>
+          </Magnetic>
+          <span className="ml-4 text-neutral-500 text-sm">{t("cta_sub")}</span>
         </div>
 
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-          <div className="order-2 lg:order-1">
-            <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.4em] text-brand-yellow/70">
-              {t("eyebrow")}
-            </p>
-            <h2 className="mb-6 font-display font-medium uppercase leading-[0.92] tracking-[-0.04em] text-[clamp(30px,4.5vw,60px)] text-white">
-              Automate the work.
-              <br />
-              <span className="text-brand-yellow">Focus on the growth.</span>
-            </h2>
-            <p className="mb-8 max-w-lg text-base leading-relaxed text-neutral-400 lg:text-lg">
-              {t("description")}
-            </p>
-
-            <div className="mb-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-5 transition-all duration-500">
-              <div className="flex items-center gap-2.5 mb-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-brand-yellow/60">
-                  Stage {stageIdx + 1} / {STAGES.length}
-                </span>
-              </div>
-              <p className="text-sm leading-relaxed text-neutral-300">
-                {stage.desc}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2.5 mb-8">
-              {["Make", "Zapier", "n8n"].map((tool) => (
-                <span
-                  key={tool}
-                  className="px-4 py-1.5 rounded-full border border-brand-yellow/20 text-brand-yellow/70 font-mono text-[10px] uppercase tracking-[0.12em]"
-                >
-                  {tool}
-                </span>
-              ))}
-            </div>
-
-            <Magnetic strength={0.4}>
-              <a
-                href="https://calendar.app.google/SkMr99BXaF5DhGn98"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor="hover"
-                className="group relative inline-flex items-center gap-2 overflow-hidden bg-brand-yellow text-brand-bg font-display font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-full transition-shadow shadow-[0_0_25px_rgba(212,217,63,0.2)] hover:shadow-[0_0_50px_rgba(212,217,63,0.5)]"
-              >
-                <span className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-white/30 transition-transform duration-700 group-hover:translate-x-[200%]" />
-                {t("cta_text")} →
-              </a>
-            </Magnetic>
-            <span className="ml-4 text-neutral-500 text-sm">{t("cta_sub")}</span>
-          </div>
-
-          <div className="order-1 lg:order-2 relative h-[45vh] lg:h-[65vh] rounded-3xl border border-white/[0.04] bg-white/[0.01] overflow-hidden">
-            <NetworkCanvas progress={stageIdx / Math.max(STAGES.length - 1, 1)} />
-          </div>
+        <div className="order-1 lg:order-2 relative h-[45vh] lg:h-[65vh] rounded-3xl border border-white/[0.04] bg-white/[0.01] overflow-hidden">
+          <NetworkCanvas progress={stageIdx / Math.max(STAGES.length - 1, 1)} />
         </div>
       </div>
     </section>

@@ -1,0 +1,285 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-bg: #0A0A0B;
+  --color-brand-navy: #200F8C;
+  --color-brand-yellow: #D4D93F;
+  --font-display: var(--font-syne), sans-serif;
+  --font-sans: var(--font-dm-sans), sans-serif;
+}
+
+html:not(.dark) {
+  --color-brand-bg: #f0f0ed;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg font-sans antialiased;
+    color: #ffffff;
+  }
+
+  html:not(.dark) body {
+    color: #0A0A0B;
+  }
+}
+
+html:not(.dark) .text-white {
+  color: #0A0A0B;
+}
+
+html:not(.dark) .text-neutral-300 {
+  color: #2a2a2a;
+}
+
+html:not(.dark) .text-neutral-400 {
+  color: #383838;
+}
+
+html:not(.dark) .text-neutral-500 {
+  color: #555555;
+}
+
+html:not(.dark) .text-neutral-600 {
+  color: #6b6b6b;
+}
+
+@utility glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html:not(.dark) .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+@utility text-stroke {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+}
+
+html:not(.dark) .text-stroke {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: rgba(212, 217, 63, 0.3);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Lenis smooth-scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Custom cursor */
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor *,
+  html.has-custom-cursor *::before,
+  html.has-custom-cursor *::after {
+    cursor: none !important;
+  }
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor select {
+    cursor: text !important;
+  }
+}
+
+/* Aurora gradient text */
+@utility text-aurora {
+  background-image: linear-gradient(
+    110deg,
+    #f0f0ea 0%,
+    #d4d93f 30%,
+    #f0f0ea 50%,
+    #6f6ad6 70%,
+    #f0f0ea 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aurora-pan 8s linear infinite;
+}
+@keyframes aurora-pan {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Glow halo */
+@utility glow-halo {
+  background: radial-gradient(
+    circle at center,
+    rgba(212, 217, 63, 0.18) 0%,
+    rgba(32, 15, 140, 0.12) 40%,
+    transparent 70%
+  );
+}
+
+/* Film grain */
+@utility grain {
+  position: relative;
+}
+@utility grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* Conic shimmer ring */
+@utility shimmer-ring {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(212, 217, 63, 0.6) 12%,
+    transparent 28%,
+    transparent 100%
+  );
+}
+
+/* Fade mask */
+@utility mask-fade-y {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+/* Marquee infinite scroll */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+/* Ken Burns */
+@keyframes kenburns {
+  0% {
+    transform: scale(1.08) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.16) translate(-1.5%, -1.2%);
+  }
+  100% {
+    transform: scale(1.08) translate(0, 0);
+  }
+}
+.animate-kenburns {
+  animation: kenburns 30s ease-in-out infinite;
+}
+
+/* Fade in animation for scroll-triggered elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .text-aurora {
+    animation: none;
+  }
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

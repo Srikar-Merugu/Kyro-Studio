@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "title": "Kyro Studio - Marketing i AI Automatizacija",
+    "description": "AI-potpomognut rast za ambiciozne brandove. Gradimo sustave koji skaliraju tvoj biznis.",
+    "og_image_alt": "Kyro Studio — Web Dizajn, Marketing i AI Automatizacija"
+  },
+  "nav": {
+    "services": "Usluge",
+    "why": "Zašto Kyro",
+    "process": "Proces",
+    "contact": "Kontakt",
+    "cta": "Zakaži Poziv"
+  },
+  "hero": {
+    "eyebrow": "Web · Marketing · AI Automatizacija",
+    "headline_1": "Tvoja Vizija.",
+    "headline_2": "Naši Sustavi.",
+    "headline_3": "Pravi Rast.",
+    "tagline_primary": "AI-potpomognut rast za ambiciozne brandove.",
+    "tagline_secondary": "Gradimo sustave koji skaliraju tvoj biznis.",
+    "differentiator": "Strategija I implementacija. Web, marketing i AI na jednom mjestu. Rezultati za tjedne, ne mjesece.",
+    "cta_primary": "Zakaži Discovery Poziv",
+    "cta_secondary": "Naše Usluge",
+    "scroll_hint": "Skrolaj",
+    "stat_1_label": "Ciljani ROI",
+    "stat_1_value": "3×",
+    "stat_1_sub": "prosječni benchmark klijenata",
+    "stat_2_label": "Automatiziranih zadataka",
+    "stat_2_value": "80%",
+    "stat_2_sub": "ponavljajućih procesa",
+    "stat_3_label": "Do rezultata",
+    "stat_3_value": "14d",
+    "stat_3_sub": "prvi sustavi uživo"
+  },
+  "marquee": {
+    "items": [
+      "Web Dizajn i Razvoj",
+      "AI Automatizacija",
+      "Performance Marketing",
+      "Prilagođene Aplikacije",
+      "Make · Zapier · n8n",
+      "Sustavi Rasta"
+    ]
+  },
+  "services": {
+    "eyebrow": "Što radimo",
+    "headline": "Sve što trebaš za",
+    "headline_accent": "skalabilni rast.",
+    "items": [
+      {
+        "number": "01",
+        "icon": "🌐",
+        "title": "Web Dizajn i Razvoj",
+        "description": "Web stranice i aplikacije izrađene po mjeri koje izgledaju izvrsno i performiraju još bolje. Bez predložaka, bez ograničenja — samo rezultati."
+      },
+      {
+        "number": "02",
+        "icon": "📡",
+        "title": "Performance Marketing",
+        "description": "Plaćene kampanje vođene podacima na Meta, Googleu i LinkedInu — fokus na konverzije, ne samo klikove."
+      },
+      {
+        "number": "03",
+        "icon": "⚡",
+        "title": "AI Automatizacija",
+        "description": "Prilagođeni tokovi rada koristeći Make, Zapier i n8n koji eliminiraju ponavljajuće zadatke, automatski kvalificiraju leadove i vode tvoj biznis 24/7."
+      },
+      {
+        "number": "04",
+        "icon": "🛠",
+        "title": "Prilagođene Aplikacije",
+        "description": "Lagani prilagođeni alati i interne aplikacije izgrađene prema tvom točnom radnom procesu — bez nepotrebnog softvera, samo ono što trebaš."
+      }
+    ]
+  },
+  "ai_automation": {
+    "eyebrow": "AI Automatizacija — detalji",
+    "headline": "Automatiziraj posao.",
+    "headline_accent": "Fokusiraj se na rast.",
+    "description": "Koristimo Make, Zapier i n8n za izgradnju inteligentnih automatizacijskih sustava koji povezuju tvoje alate, kvalificiraju leadove i vode tvoje procese cijeli dan — da se možeš fokusirati na ono što stvarno pomiče iglu.",
+    "tools": ["Make", "Zapier", "n8n"],
+    "capabilities": [
+      "Kvalifikacija leadova i CRM automatizacija",
+      "Email sekvence i follow-up tokovi",
+      "Sinkronizacija podataka između platformi",
+      "AI-potpomognuti sadržajni procesi",
+      "Prilagođene reporting nadzorne ploče",
+      "Webhook i API integracije"
+    ],
+    "cta_text": "Automatiziraj Tvoj Biznis",
+    "cta_sub": "Besplatni 30-min discovery poziv"
+  },
+  "why": {
+    "eyebrow": "Zašto Kyro Studio",
+    "headline": "Ne samo konzultanti.",
+    "headline_accent": "Mi gradimo i vodimo.",
+    "stats": [
+      { "value": "3×",  "label": "Ciljani povrat investicije" },
+      { "value": "80%", "label": "Automatiziranih zadataka" },
+      { "value": "14d", "label": "Do prvih rezultata" },
+      { "value": "24/7", "label": "Sustavi rade" }
+    ],
+    "stats_disclaimer": "Temeljeno na ciljevima i benchmarkovima kroz projekte klijenata.",
+    "bullets": [
+      "Radimo i strategiju I implementaciju — ne samo savjete.",
+      "Web, marketing i AI na jednom mjestu — nema žongliranja s više agencija.",
+      "Krećemo se brzo — rezultati za tjedne, ne kvartale.",
+      "Sve po mjeri — bez predložaka, bez copy-paste pristupa.",
+      "Startup-friendly — radimo s ograničenim budžetima i velikim ambicijama."
+    ]
+  },
+  "process": {
+    "eyebrow": "Kako funkcionira",
+    "headline": "Od ideje do",
+    "headline_accent": "živih rezultata.",
+    "steps": [
+      {
+        "number": "Korak 01",
+        "title": "Istraživanje",
+        "description": "Dubinski analiziramo tvoj poslovni model, ciljeve i aktualna uska grla kako bismo mapirali prilike. — 1. tjedan"
+      },
+      {
+        "number": "Korak 02",
+        "title": "Strategija",
+        "description": "Dizajniramo prilagođenu roadmapu koja kombinira web, marketing i AI automatizaciju za maksimalni učinak. — 1.–2. tjedan"
+      },
+      {
+        "number": "Korak 03",
+        "title": "Izgradnja i Lansiranje",
+        "description": "Gradimo, automatiziramo i idemo uživo brzo. Vidjet ćeš stvarne rezultate unutar prvih dva tjedna. — 2.–4. tjedan"
+      },
+      {
+        "number": "Korak 04",
+        "title": "Optimizacija",
+        "description": "Kontinuirana iteracija i praćenje performansi za složen rast kroz vrijeme. — Kontinuirano"
+      }
+    ]
+  },
+  "cta": {
+    "headline_1": "Spreman za",
+    "headline_accent": "izgraditi nešto",
+    "headline_2": "što stvarno radi?",
+    "subtext": "Zakaži besplatni 30-minutni discovery poziv. Bez pitcha, bez pritiska — samo jasnoća o tome kako možemo pokrenuti tvoj biznis.",
+    "button": "Zakaži Discovery Poziv",
+    "booking_link": "https://calendar.app.google/SkMr99BXaF5DhGn98",
+    "email_label": "Ili nam piši na",
+    "email": "hello@kyrostudio.eu",
+    "card_call_title": "Zakaži Poziv",
+    "card_call_desc": "Besplatni 30-minutni discovery poziv. Bez pitcha, bez pritiska — samo iskren razgovor o tvojim ciljevima i kako možemo pomoći.",
+    "card_form_title": "Pošalji Poruku",
+    "form": {
+      "name_label": "Tvoje Ime",
+      "name_placeholder": "Ivan Horvat",
+      "email_label": "Email Adresa",
+      "email_placeholder": "ivan@tvrtka.hr",
+      "message_label": "Kako možemo pomoći?",
+      "message_placeholder": "Reci nam o svom projektu, ciljevima ili izazovima...",
+      "submit": "Pošalji Poruku",
+      "sending": "Slanje...",
+      "success_title": "Poruka Poslana!",
+      "success_text": "Javit ćemo se u roku od 24 sata.",
+      "send_another": "Pošalji novu poruku",
+      "error": "Nešto je pošlo po krivu. Pokušaj ponovo ili nam piši direktno na email."
+    }
+  },
+  "footer": {
+    "tagline": "Web · Marketing · AI Automatizacija",
+    "copyright": "© 2025 Kyro Studio. Sva prava pridržana.",
+    "contact": "Kontakt",
+    "legal": {
+      "privacy": "Pravila privatnosti",
+      "terms": "Uvjeti korištenja"
+    },
+    "links": [
+      { "label": "LinkedIn",  "href": "https://www.linkedin.com/company/kyrostudio-agency/" },
+      { "label": "Instagram", "href": "https://www.instagram.com/kyrostudio.eu/" },
+      { "label": "hello@kyrostudio.eu", "href": "mailto:hello@kyrostudio.eu" }
+    ]
+  },
+  "cookie": {
+    "message": "Koristimo kolačiće za poboljšanje vašeg iskustva i analizu prometa na stranici.",
+    "accept": "Prihvati sve",
+    "decline": "Odbij",
+    "learn_more": "Saznaj više"
+  },
+  "legal": {
+    "privacy_title": "Pravila privatnosti",
+    "terms_title": "Uvjeti korištenja",
+    "company": "Kyro Studio",
+    "email": "hello@kyrostudio.eu",
+    "domain": "kyrostudio.eu"
+  }
+}

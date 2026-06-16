@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "title": "Kyro Studio - Marketing & AI Automation",
+    "description": "Kyro Studio builds custom websites, performance marketing campaigns and AI automation systems using Make, Zapier and n8n. Based in Croatia, working globally.",
+    "og_image_alt": "Kyro Studio — Web Design, Marketing & AI Automation"
+  },
+  "nav": {
+    "services": "Services",
+    "why": "Why Kyro",
+    "process": "Process",
+    "contact": "Contact",
+    "cta": "Book a Call"
+  },
+  "hero": {
+    "eyebrow": "Web · Marketing · AI Automation",
+    "headline_1": "Your Vision.",
+    "headline_2": "Our Systems.",
+    "headline_3": "Real Growth.",
+    "tagline_primary": "AI-powered growth for ambitious brands.",
+    "tagline_secondary": "We build the systems that scale your business.",
+    "differentiator": "Strategy AND implementation. Web, marketing and AI under one roof. Results in weeks, not months.",
+    "cta_primary": "Book Discovery Call",
+    "cta_secondary": "Our Services",
+    "scroll_hint": "Scroll",
+    "stat_1_label": "ROI Target",
+    "stat_1_value": "3×",
+    "stat_1_sub": "average client benchmark",
+    "stat_2_label": "Tasks Automated",
+    "stat_2_value": "80%",
+    "stat_2_sub": "of repetitive workflows",
+    "stat_3_label": "Time to Results",
+    "stat_3_value": "14d",
+    "stat_3_sub": "first systems live"
+  },
+  "marquee": {
+    "items": [
+      "Web Design & Development",
+      "AI Automation",
+      "Performance Marketing",
+      "Custom Applications",
+      "Make · Zapier · n8n",
+      "Growth Systems"
+    ]
+  },
+  "services": {
+    "eyebrow": "What we do",
+    "headline": "Everything you need to",
+    "headline_accent": "grow at scale.",
+    "items": [
+      {
+        "number": "01",
+        "icon": "🌐",
+        "title": "Web Design & Development",
+        "description": "Custom-built websites and web apps that look stunning and perform even better. No templates, no limitations — just results."
+      },
+      {
+        "number": "02",
+        "icon": "📡",
+        "title": "Performance Marketing",
+        "description": "Data-driven paid campaigns across Meta, Google, and LinkedIn — built for conversion, not just clicks."
+      },
+      {
+        "number": "03",
+        "icon": "⚡",
+        "title": "AI Automation",
+        "description": "Custom workflows using Make, Zapier and n8n that eliminate repetitive tasks, qualify leads automatically, and run your business 24/7."
+      },
+      {
+        "number": "04",
+        "icon": "🛠",
+        "title": "Custom Applications",
+        "description": "Lightweight custom tools and internal apps built around your exact workflow — no bloated software, just what you need."
+      }
+    ]
+  },
+  "ai_automation": {
+    "eyebrow": "AI Automation Deep Dive",
+    "headline": "Automate the work.",
+    "headline_accent": "Focus on the growth.",
+    "description": "We use Make, Zapier and n8n to build intelligent automation systems that connect your tools, qualify your leads, and run your workflows around the clock — so you can focus on what actually moves the needle.",
+    "tools": ["Make", "Zapier", "n8n"],
+    "capabilities": [
+      "Lead qualification & CRM automation",
+      "Email sequences & follow-up flows",
+      "Cross-platform data sync",
+      "AI-powered content pipelines",
+      "Custom reporting dashboards",
+      "Webhook & API integrations"
+    ],
+    "cta_text": "Automate Your Business",
+    "cta_sub": "Free 30-min discovery call"
+  },
+  "why": {
+    "eyebrow": "Why Kyro Studio",
+    "headline": "Not just consultants.",
+    "headline_accent": "We build and run it.",
+    "stats": [
+      { "value": "3×",  "label": "Average ROI Target" },
+      { "value": "80%", "label": "Tasks Automated" },
+      { "value": "14d", "label": "To First Results" },
+      { "value": "24/7", "label": "Systems Running" }
+    ],
+    "stats_disclaimer": "Based on targets and benchmarks across client projects.",
+    "bullets": [
+      "We do both strategy AND implementation — not just advice.",
+      "Web, marketing and AI under one roof — no juggling multiple agencies.",
+      "We move fast — results in weeks, not quarters.",
+      "Custom everything — no templates, no copy-paste playbooks.",
+      "Startup-friendly — we work with lean budgets and big ambitions."
+    ]
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "headline": "From discovery to",
+    "headline_accent": "live results.",
+    "steps": [
+      {
+        "number": "Step 01",
+        "title": "Discovery",
+        "description": "We deep-dive into your business, goals, and current bottlenecks to map the opportunity. — Week 1"
+      },
+      {
+        "number": "Step 02",
+        "title": "Strategy",
+        "description": "We design a custom roadmap combining web, marketing and AI automation for maximum impact. — Week 1–2"
+      },
+      {
+        "number": "Step 03",
+        "title": "Build & Launch",
+        "description": "We build, automate and go live fast. You'll see real output within the first two weeks. — Week 2–4"
+      },
+      {
+        "number": "Step 04",
+        "title": "Optimize",
+        "description": "Continuous iteration and performance monitoring to compound your results over time. — Ongoing"
+      }
+    ]
+  },
+  "cta": {
+    "headline_1": "Ready to",
+    "headline_accent": "build something",
+    "headline_2": "that works?",
+    "subtext": "Book a free 30-minute discovery call. No pitch, no pressure — just clarity on how we can move your business forward.",
+    "button": "Book Discovery Call",
+    "booking_link": "https://calendar.app.google/SkMr99BXaF5DhGn98",
+    "email_label": "Or email us at",
+    "email": "hello@kyrostudio.eu",
+    "card_call_title": "Book a Call",
+    "card_call_desc": "Free 30-minute discovery call. No pitch, no pressure — just an honest conversation about your goals and how we can help.",
+    "card_form_title": "Send a Message",
+    "form": {
+      "name_label": "Your Name",
+      "name_placeholder": "John Smith",
+      "email_label": "Email Address",
+      "email_placeholder": "john@company.com",
+      "message_label": "How can we help?",
+      "message_placeholder": "Tell us about your project, goals, or challenges...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success_title": "Message Sent!",
+      "success_text": "We'll get back to you within 24 hours.",
+      "send_another": "Send another message",
+      "error": "Something went wrong. Please try again or email us directly."
+    }
+  },
+  "footer": {
+    "tagline": "Web · Marketing · AI Automation",
+    "copyright": "© 2025 Kyro Studio. All rights reserved.",
+    "contact": "Contact",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "links": [
+      { "label": "LinkedIn",  "href": "https://www.linkedin.com/company/kyrostudio-agency/" },
+      { "label": "Instagram", "href": "https://www.instagram.com/kyrostudio.eu/" },
+      { "label": "hello@kyrostudio.eu", "href": "mailto:hello@kyrostudio.eu" }
+    ]
+  },
+  "cookie": {
+    "message": "We use cookies to improve your experience and analyse site traffic.",
+    "accept": "Accept All",
+    "decline": "Decline",
+    "learn_more": "Learn more"
+  },
+  "legal": {
+    "privacy_title": "Privacy Policy",
+    "terms_title": "Terms of Service",
+    "company": "Kyro Studio",
+    "email": "hello@kyrostudio.eu",
+    "domain": "kyrostudio.eu"
+  }
+}

@@ -99,8 +99,8 @@ const StatsShowcase = () => {
             className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center"
           >
             <span
-              className="block font-display font-medium leading-none tracking-[-0.05em] text-white"
-              style={{ fontSize: "clamp(80px, 22vw, 320px)" }}
+              className="block font-display font-bold leading-none tracking-[-0.05em] text-white"
+              style={{ fontSize: "clamp(100px, 28vw, 400px)" }}
             >
               {stat.display || stat.numVal}{stat.suffix}
             </span>
